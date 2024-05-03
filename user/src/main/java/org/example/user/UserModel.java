@@ -19,7 +19,7 @@ public class UserModel {
     private String avatar;
 
     @Enumerated(EnumType.STRING)
-    private Integer gender;
+    private Gender gender;
     private boolean admin;
 
 }
