@@ -1,0 +1,26 @@
+package org.example.lock;
+
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import lombok.*;
+
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class LockModel {
+    @Id
+    @GeneratedValue
+    private Long id;
+    private String uid;
+    private float power;
+    private boolean online;
+    private boolean locked;
+    private Long ownerId;
+    private float latitude;
+    private float longitude;
+}
