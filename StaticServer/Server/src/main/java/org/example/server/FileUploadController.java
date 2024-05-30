@@ -14,7 +14,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1/files")
 public class FileUploadController {
 
     private static final String UPLOAD_DIR = "/uploads";

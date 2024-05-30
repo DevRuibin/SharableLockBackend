@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/logs")
+@RequestMapping("/api/v1/logs")
 @RequiredArgsConstructor
 public class LogController {
 
