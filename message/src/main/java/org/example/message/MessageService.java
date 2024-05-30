@@ -9,23 +9,29 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class MessageService {
-    private final MessageRepository repository;
 
+    private final MessageRepository messageRepository;
     private final RabbitTemplate rabbitTemplate;
 
     public void sendMessage(MessageModel message) {
+        messageRepository.save(message);
         rabbitTemplate.convertAndSend("messageQueue", message);
     }
-    public List<MessageModel> getMessages(Long receiverId) {
-        return repository.findByToUserId(receiverId);
+
+    public void markAsRead(Long id) {
+        messageRepository.findById(id).ifPresent(message -> {
+            message.setRead(true);
+            messageRepository.save(message);
+        });
     }
 
-    public MessageModel createMessage(MessageModel messageModel) {
-        return repository.save(messageModel);
+
+    public List<MessageModel> getMessagesByUserID(Long userId) {
+        return messageRepository.findByToUserIdOrSenderId(userId, userId)
+                .orElse(List.of());
     }
 
-    public List<MessageModel> getMessages(Long receiverId, Long senderId) {
-        return repository.findByToUserIdAndSenderId(receiverId, senderId);
+    public void deleteMessage(Long id) {
+        messageRepository.deleteById(id);
     }
 }
-

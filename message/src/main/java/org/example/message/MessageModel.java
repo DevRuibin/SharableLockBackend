@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.*;
+import java.io.Serializable;
 
 @Entity
 @Getter
@@ -11,7 +12,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MessageModel {
+public class MessageModel implements Serializable  {
     @Id
     @GeneratedValue
     private Long id;
@@ -21,3 +22,4 @@ public class MessageModel {
     private Long timestamp;
     private boolean read;
 }
+

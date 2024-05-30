@@ -1,28 +1,38 @@
 package org.example.message;
 
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/locks")
 @RequiredArgsConstructor
+@RequestMapping("/api/messages")
 public class MessageController {
-    private final MessageService service;
 
-    public ResponseEntity<MessageModel> createMessage(MessageModel messageModel) {
-        return ResponseEntity.ok(service.createMessage(messageModel));
+    private final MessageService messageService;
+
+    @PostMapping
+    public void sendMessage(@RequestBody MessageModel message) {
+        messageService.sendMessage(message);
     }
 
-    public ResponseEntity<List<MessageModel>> getMessages(Long receiverId) {
-        return ResponseEntity.ok(service.getMessages(receiverId));
+    @PatchMapping("/{id}")
+    public ResponseEntity<Void> markAsRead(@PathVariable Long id) {
+        messageService.markAsRead(id);
+        return ResponseEntity.ok().build();
     }
 
-    public ResponseEntity<List<MessageModel>> getMessages(Long receiverId, Long senderId) {
-        return ResponseEntity.ok(service.getMessages(receiverId, senderId));
+    @GetMapping("/{userId}")
+    public ResponseEntity<List<MessageModel>> getMessages(@PathVariable Long userId) {
+        return ResponseEntity.ok(messageService.getMessagesByUserID(userId));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteMessage(@PathVariable Long id) {
+        messageService.deleteMessage(id);
+        return ResponseEntity.ok().build();
     }
 }
+
