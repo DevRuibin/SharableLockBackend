@@ -21,6 +21,19 @@ spring:
           predicates:
             - Path=/api/v1/schools/**
 
+        - id: locks
+          uri: http://localhost:8300
+          predicates:
+            - Path=/api/v1/locks/**
+        - id: users
+          uri: http://localhost:8100
+          predicates:
+            - Path=/api/v1/users/**
+        - id: messages
+          uri: http://localhost:8200
+          predicates:
+            - Path=/api/v1/messages/**
+
 management:
   tracing:
     sampling:

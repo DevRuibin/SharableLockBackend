@@ -3,6 +3,7 @@ package org.example.lock;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
 
@@ -14,8 +15,9 @@ import lombok.*;
 @Builder
 public class LockModel {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String name;
     private String uid;
     private float power;
     private boolean online;
@@ -23,4 +25,6 @@ public class LockModel {
     private Long ownerId;
     private float latitude;
     private float longitude;
+    private int report_battery;
+    private int report_location;
 }
