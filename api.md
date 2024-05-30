@@ -35,14 +35,18 @@
 ## Microservices
 
 - Spring Boot
-  • DiscoveryApplication :8761/
-  • GatewayApplication :8222/
-  • LockApplication :8300/
-  • MessageApplication :8200/
-  • SchoolApplication :8070/
-  • UserApplication :8100/
-  • ConfigServerApplication :8888/
-  • StudentApplication :8090/
+  * DiscoveryApplication :8761/
+  * GatewayApplication :8222/
+  * LockApplication :8300/
+  * MessageApplication :8200/
+  * SchoolApplication :8070/
+  * UserApplication :8100/
+  * ConfigServerApplication :8888/
+  * StudentApplication :8090/
+  * StaticServerApplication :8400/
+  * Nginx                   : 8500/
+  * MQTT                    : 8600/
+  
 
 - API:
 

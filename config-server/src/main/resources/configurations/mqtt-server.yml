@@ -1,0 +1,22 @@
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+
+server:
+  port: 8600
+spring:
+  application:
+    name: mqtt-server
+
+application:
+  config:
+
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
