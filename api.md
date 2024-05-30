@@ -47,6 +47,7 @@
   * Nginx                   : 8500/
   * MQTT                    : 8600/
   * Logging                 : 8700/    /api/v1/logs/
+  * authentication          : 8800/    /api/v1/auth/
   
 
 - API:
