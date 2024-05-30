@@ -35,6 +35,30 @@ services:
     networks:
       - zipkin
 
+  elasticsearch:
+    image: elasticsearch:7.17.21
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    networks:
+      - esnet
+
+
+  kibana:
+    image: kibana:7.17.21
+    container_name: kibana
+    ports:
+      - "5601:5601"
+    environment:
+      ELASTICSEARCH_HOSTS: "http://elasticsearch:9200"
+    networks:
+      - esnet
+
 
   rabbitmq:
     build: ./RabbitMQ
@@ -53,9 +77,12 @@ networks:
     driver: bridge
   zipkin:
     driver: bridge
+  esnet:
+    driver: bridge
 
 volumes:
   postgres:
   pgadmin:
   rabbitmq_data:
+  esdata:
 

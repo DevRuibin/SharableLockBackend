@@ -46,8 +46,11 @@
   * StaticServerApplication :8400/
   * Nginx                   : 8500/
   * MQTT                    : 8600/
+  * Logging                 : 8700/
   
 
 - API:
 
 1. UserApplication http://localhost:8100/swagger-ui/index.html
+2. kikibana http://localhost:5601
+3. ElasticSearch http://localhost:9200

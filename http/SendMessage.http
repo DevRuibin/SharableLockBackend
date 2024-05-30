@@ -9,3 +9,13 @@ Content-Type: application/json
   "timestamp": 1623677767000,
   "read": false
 }
+
+### Test Elasticsearch
+POST http://localhost:8700/logs
+Content-Type: application/json
+
+{
+  "service": "message-service",
+  "level": "INFO",
+  "message": "Hello, this is a test message, I am ruibin"
+}
