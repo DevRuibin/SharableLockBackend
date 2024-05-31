@@ -1,5 +1,5 @@
 ### Send a test message to the REST API
-POST http://localhost:8200/api/messages
+POST http://localhost:8200/api/v1/messages
 Content-Type: application/json
 
 {
@@ -18,4 +18,16 @@ Content-Type: application/json
   "service": "message-service",
   "level": "INFO",
   "message": "Hello, this is a test message, I am ruibin"
+}
+
+
+### Creaet a user
+
+POST http://localhost:8100/api/v1/users
+
+Content-Type: application/json
+
+{
+  "name": "ruibin",
+  "email": "ruibin.zhang@gmaidl.com"
 }

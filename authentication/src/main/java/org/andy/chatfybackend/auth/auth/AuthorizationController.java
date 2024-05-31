@@ -2,6 +2,7 @@ package org.andy.chatfybackend.auth.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthorizationController {
     private final AuthorizationService authorizationService;
 
-    private ResponseEntity<Boolean> authorize(AuthorizationModel model) {
+    @PostMapping("/authorize")
+    public ResponseEntity<Boolean> authorize(AuthorizationModel model) {
         return ResponseEntity.ok(authorizationService.authorize(model));
     }
-
 }
