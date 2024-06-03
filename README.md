@@ -4,6 +4,11 @@ This is the backend server for the master thesis project "Shareable Lock".
 We use microservices architecture to build the backend server, which is modified from
 [ali-bouali/springboot-3-micro-service-demo](https://github.com/ali-bouali/springboot-3-micro-service-demo)
 
+# Authors
+
+1. [Ruibin Zhang](https://github.com/devruibin)
+2. [Hasan Bilgin](https://github.com/hasancpp)
+
 ## Technologies Used
 
 ### Programming Languages and Frameworks
@@ -64,3 +69,7 @@ For more details, please refer to the [API documentation](https://devruibin.gith
 
 
 > The docs necessary is in a submodule, see how to use the module [here](https://devruibin.github.io/ShareableLockDocs/submodule.html)
+
+## Acknowledgements
+
+1. [Ali Bouali](https://github.com/ali-bouali)
