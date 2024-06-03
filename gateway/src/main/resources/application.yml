@@ -1,5 +1,10 @@
 spring:
   application:
     name: gateway
+  main:
+    allow-circular-references: true
+  cloud:
+    config:
+      name: gateway, services
   config:
     import: optional:configserver:http://localhost:8888

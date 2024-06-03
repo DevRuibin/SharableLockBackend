@@ -22,11 +22,11 @@ Content-Type: application/json
 
 
 ### Creaet a user
-POST http://localhost:8100/api/v1/users
+POST http://localhost:8222/api/v1/users
 Content-Type: application/json
 
 {
   "password": "ruibin",
-  "email": "ruibin.zhang@gmaidldd.com"
+  "email": "rujjhjkibin.zhdddang02133@gmaidldd.com"
 }
 

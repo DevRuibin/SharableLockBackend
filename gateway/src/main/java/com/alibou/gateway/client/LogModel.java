@@ -1,20 +1,20 @@
-package org.example.lock.client;
+package com.alibou.gateway.client;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import org.springframework.data.annotation.Id;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
-@ToString
+@Data
 @Builder
-@Setter
-@Getter
 public class LogModel implements Serializable {
-    private String service;
-    private String level;
+
+    @JsonProperty("message")
     private String message;
+
+    @JsonProperty("level")
+    private String level;
+
+    @JsonProperty("service")
+    private String service;
 }

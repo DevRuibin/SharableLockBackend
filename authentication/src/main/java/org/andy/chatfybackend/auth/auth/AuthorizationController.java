@@ -1,4 +1,4 @@
-package org.authentication.auth.auth;
+package org.andy.chatfybackend.auth.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

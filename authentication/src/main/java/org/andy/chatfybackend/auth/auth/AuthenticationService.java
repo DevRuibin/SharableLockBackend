@@ -1,11 +1,11 @@
-package org.authentication.auth.auth;
+package org.andy.chatfybackend.auth.auth;
 
 import lombok.RequiredArgsConstructor;
-import org.authentication.auth.config.JwtService;
-import org.authentication.auth.basic_user.BasicUser;
-import org.authentication.auth.basic_user.BasicUserRepository;
-import org.authentication.auth.exceptions.DuplicateUserException;
-import org.authentication.auth.exceptions.IncorrectPasswordException;
+import org.andy.chatfybackend.auth.basic_user.BasicUser;
+import org.andy.chatfybackend.auth.basic_user.BasicUserRepository;
+import org.andy.chatfybackend.auth.config.JwtService;
+import org.andy.chatfybackend.auth.exceptions.DuplicateUserException;
+import org.andy.chatfybackend.auth.exceptions.IncorrectPasswordException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;

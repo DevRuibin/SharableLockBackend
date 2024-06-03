@@ -1,4 +1,4 @@
-package org.authentication.auth.config;
+package org.andy.chatfybackend.auth.config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
