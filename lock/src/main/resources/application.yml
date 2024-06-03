@@ -1,5 +1,9 @@
 spring:
   application:
     name: locks
+  cloud:
+    config:
+      name: locks, services
+
   config:
     import: optional:configserver:http://localhost:8888

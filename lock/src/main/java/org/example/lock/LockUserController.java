@@ -2,6 +2,8 @@ package org.example.lock;
 
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import org.example.lock.client.LogClient;
+import org.example.lock.client.LogModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,7 @@ import java.util.NoSuchElementException;
 @RequiredArgsConstructor
 public class LockUserController {
     private final LockUserService service;
+    private final LogClient logClient;
 
     @Operation(summary = "Get the relation data of user and lock")
     @GetMapping("/{userId}/{lockId}")
@@ -31,7 +34,15 @@ public class LockUserController {
 
     @Operation(summary = "Get all locks by user id")
     @GetMapping("/{userId}")
-    public ResponseEntity<LockUserModel> getLockByUserId(@PathVariable("userId") Long userId) {
+    public ResponseEntity<List<LockUserModel>> getLockByUserId(@PathVariable("userId") Long userId) {
+        LogModel logModel = LogModel.builder()
+                .message("Get all locks by user id")
+                .level("INFO")
+                .service("lock-service")
+            .build();
+        System.out.println(logModel);
+        logClient.log(logModel);
+
         try {
             return ResponseEntity.ok(service.getLockByUserId(userId));
         } catch (NoSuchElementException e) {

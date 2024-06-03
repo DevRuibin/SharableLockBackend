@@ -12,6 +12,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 public class LockUserModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

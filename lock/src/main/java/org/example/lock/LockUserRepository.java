@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface LockUserRepository extends JpaRepository<LockUserModel, Long> {
     @Query("SELECT l FROM LockUserModel l WHERE l.userId = :userId")
-    Optional<LockUserModel> findByUserId(Long userId);
+    Optional<List<LockUserModel>> findByUserId(Long userId);
 
     @Query("SELECT l FROM LockUserModel l JOIN l.lock lock WHERE l.userId = :userId AND lock.id = :lockId")
     Optional<LockUserModel> findByUserIdAndLockId(@Param("userId") Long userId, @Param("lockId") Long lockId);

@@ -24,7 +24,7 @@ spring:
 
 application:
   config:
-    users-url: http://localhost:8222/api/v1/users
+    users-url: http://localhost:8100/api/v1
 
 management:
   tracing:
