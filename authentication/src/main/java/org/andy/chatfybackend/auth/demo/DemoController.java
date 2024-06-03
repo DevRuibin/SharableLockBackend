@@ -1,4 +1,4 @@
-package org.andy.chatfybackend.auth.demo;
+package org.authentication.auth.demo;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;

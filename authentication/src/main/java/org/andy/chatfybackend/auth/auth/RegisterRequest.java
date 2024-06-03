@@ -1,4 +1,4 @@
-package org.andy.chatfybackend.auth.auth;
+package org.authentication.auth.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

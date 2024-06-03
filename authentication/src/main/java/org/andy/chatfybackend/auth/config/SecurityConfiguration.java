@@ -1,7 +1,6 @@
-package org.andy.chatfybackend.auth.config;
+package org.authentication.auth.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.jsonwebtoken.JwtException;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

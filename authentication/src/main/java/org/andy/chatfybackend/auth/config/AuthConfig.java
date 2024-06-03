@@ -1,7 +1,7 @@
-package org.andy.chatfybackend.auth.config;
+package org.authentication.auth.config;
 
 import lombok.RequiredArgsConstructor;
-import org.andy.chatfybackend.auth.basic_user.BasicUserRepository;
+import org.authentication.auth.basic_user.BasicUserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

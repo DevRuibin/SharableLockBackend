@@ -1,4 +1,4 @@
-package org.andy.chatfybackend.api;
+package org.authentication.api;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;

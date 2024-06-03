@@ -1,4 +1,4 @@
-package org.andy.chatfybackend.auth.basic_user;
+package org.authentication.auth.basic_user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

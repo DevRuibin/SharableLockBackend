@@ -1,7 +1,6 @@
-package org.andy.chatfybackend.auth.auth;
+package org.authentication.auth.auth;
 
 
-import jakarta.ws.rs.GET;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

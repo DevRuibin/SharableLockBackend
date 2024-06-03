@@ -1,11 +1,10 @@
-package org.andy.chatfybackend.auth.config;
+package org.authentication.auth.config;
 
 import io.jsonwebtoken.JwtException;
-import org.andy.chatfybackend.auth.exceptions.DuplicateUserException;
-import org.andy.chatfybackend.auth.exceptions.IncorrectPasswordException;
+import org.authentication.auth.exceptions.DuplicateUserException;
+import org.authentication.auth.exceptions.IncorrectPasswordException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.NoHandlerFoundException;
