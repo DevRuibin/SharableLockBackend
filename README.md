@@ -6,26 +6,42 @@ We use microservices architecture to build the backend server, which is modified
 
 ## Technologies
 
-1. Java 17
-2. Spring Boot 3.2.6
-3. Spring Cloud
-4. Spring Data JPA
-5. PostgreSQL
-6. Docker
-7. Maven
-8. Lombok
-9. Gradle
-10. RabbitMQ
-11. Zipkin
-12. OpenFeign
-13. Swagger
-14. Nginx
-15. elasticsearch
-16. Kibana
-17. pgAdmin
-18. Mqtt
-19. LoRaWAN
-20. The Things Network
+## Technologies Used
+
+### Programming Languages and Frameworks
+- Java 17
+- Spring Ecosystem
+- Lombok
+
+### Build and Dependency Management
+- Maven
+- Gradle
+
+### Databases and Data Management
+- PostgreSQL
+- Elasticsearch
+- pgAdmin
+
+### Messaging and Communication
+- RabbitMQ
+- MQTT
+- LoRaWAN
+- The Things Network
+
+### Containerization and Orchestration
+- Docker
+
+### Monitoring and Logging
+- Zipkin
+- Kibana
+
+### API and Documentation
+- OpenFeign
+- Swagger
+
+### Web Server
+- Nginx
+
 
 ## Project Components
 
