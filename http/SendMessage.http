@@ -3,6 +3,7 @@ POST http://localhost:8200/api/v1/messages
 Content-Type: application/json
 
 {
+  "type": "NOTIFICATION",
   "senderId": 1,
   "toUserId": 2,
   "text": "Hello, this is a test message, I am ruibin",

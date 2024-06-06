@@ -15,6 +15,7 @@ public class MessageController {
 
     @PostMapping
     public void sendMessage(@RequestBody MessageModel message) {
+        System.out.println("Sending message: " + message);
         messageService.sendMessage(message);
     }
 

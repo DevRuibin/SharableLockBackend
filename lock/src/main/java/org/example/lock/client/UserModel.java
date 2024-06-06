@@ -1,6 +1,15 @@
 package org.example.lock.client;
 
-public class UserModel {
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+
+import java.io.Serializable;
+
+@Builder
+@Getter
+@Data
+public class UserModel implements Serializable {
     private Long id;
     private String username;
     private String email;

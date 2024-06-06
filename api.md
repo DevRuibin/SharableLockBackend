@@ -57,3 +57,5 @@
 2. StaticServerApplication http://localhost:8500/swagger-ui/index.html
 2. kikibana http://localhost:5601
 3. ElasticSearch http://localhost:9200
+4. Zipkin http://localhost:9411
+5. RabbitMQ http://localhost:15672

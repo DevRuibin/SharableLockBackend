@@ -13,6 +13,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 public class MessageModel implements Serializable  {
     @Id
     @GeneratedValue
@@ -21,6 +22,7 @@ public class MessageModel implements Serializable  {
     private Long senderId;
     private Long toUserId;
     private String text;
+    private String detail;
     private Long timestamp;
     private boolean read;
 }
