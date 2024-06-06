@@ -39,6 +39,19 @@ public class UserService {
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
+
+    public UserModel login(UserRequest user) {
+        return userRepository.findByEmailAndPassword(user.getEmail(), user.getPassword()).orElseThrow();
+    }
+
+    public UserModel changePassword(Long id, ChangePwdRequest changePwdRequest) {
+        UserModel userModel = userRepository.findById(id).orElseThrow();
+        if(userModel.getPassword().equals(changePwdRequest.getOldPassword())){
+            userModel.setPassword(changePwdRequest.getNewPassword());
+            return userRepository.save(userModel);
+        }
+        throw new RuntimeException("Old password is incorrect");
+    }
 }
 
 

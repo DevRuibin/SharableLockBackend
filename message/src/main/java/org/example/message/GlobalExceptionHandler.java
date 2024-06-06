@@ -1,4 +1,4 @@
-package org.example.user;
+package org.example.message;
 
 
 import org.springframework.http.HttpStatus;

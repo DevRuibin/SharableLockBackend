@@ -1,6 +1,7 @@
 package org.example.user;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,11 +16,23 @@ public class UserController {
     @Operation(summary = "Create a new user")
     @PostMapping
     public ResponseEntity<UserModel> create(@RequestBody UserRequest user) {
+        // send a log message to logging message in async
         UserModel userResponse = service.createUser(user);
         return ResponseEntity.ok(userResponse);
     }
+    @Operation(summary = " Login a user",
+            description = "Login user with email and password",
+            responses = {
+            @ApiResponse(responseCode = "200", description = "User logged in successfully"),
+            @ApiResponse(responseCode = "403", description = "User not found or password is incorrect")
+    })
+    @PostMapping("/login")
+    public ResponseEntity<UserModel> login(@RequestBody UserRequest user) {
+        UserModel userResponse = service.login(user);
+        return ResponseEntity.ok(userResponse);
+    }
 
-    @Operation(summary = "Find user by ID")
+    @Operation(summary = "Retrieve user information.")
     @GetMapping("/{id}")
     public ResponseEntity<UserModel> findById(@PathVariable Long id) {
         return ResponseEntity.ok(service.findById(id));
@@ -29,6 +42,13 @@ public class UserController {
     @PutMapping("/{id}")
     public ResponseEntity<UserModel> update(@PathVariable Long id, UserModel user) {
         UserModel userResponse = service.updateUser(id, user);
+        return ResponseEntity.ok(userResponse);
+    }
+
+    @Operation(summary = "Change the password of an existing user")
+    @PutMapping("/{id}/change-password")
+    public ResponseEntity<UserModel> changePassword(@PathVariable Long id, @RequestBody ChangePwdRequest changePwdRequest) {
+        UserModel userResponse = service.changePassword(id, changePwdRequest);
         return ResponseEntity.ok(userResponse);
     }
 

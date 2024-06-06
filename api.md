@@ -54,5 +54,6 @@
 
 1. UserApplication http://localhost:8100/swagger-ui/index.html
 1. LockApplication http://localhost:8300/swagger-ui/index.html
+2. StaticServerApplication http://localhost:8500/swagger-ui/index.html
 2. kikibana http://localhost:5601
 3. ElasticSearch http://localhost:9200

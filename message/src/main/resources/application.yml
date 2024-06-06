@@ -1,5 +1,9 @@
 spring:
   application:
     name: messages
+  cloud:
+    config:
+      name: messages, services
+
   config:
     import: optional:configserver:http://localhost:8888
