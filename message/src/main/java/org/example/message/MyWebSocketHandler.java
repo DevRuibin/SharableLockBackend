@@ -5,6 +5,8 @@ import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 import org.springframework.web.socket.TextMessage;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.w3c.dom.Text;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -15,6 +17,7 @@ import java.util.Map;
 public class MyWebSocketHandler extends TextWebSocketHandler {
 
     private final Map<Long, WebSocketSession> sessions = new ConcurrentHashMap<>();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -31,7 +34,8 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
         WebSocketSession session = sessions.get(userId);
         if (session != null && session.isOpen()) {
             try {
-                session.sendMessage(new TextMessage(message.getText()));
+                String jsonMessage = objectMapper.writeValueAsString(message);
+                session.sendMessage(new TextMessage(jsonMessage));
             } catch (Exception e) {
                 e.printStackTrace();
             }

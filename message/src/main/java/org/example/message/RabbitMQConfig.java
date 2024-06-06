@@ -21,6 +21,15 @@ public class RabbitMQConfig {
     }
 
     @Bean
+    public Queue notificationQueue() {
+        return new Queue("notificationQueue", false);
+    }
+
+    @Bean
+    public Queue statusQueue() {
+        return new Queue("statusQueue", false);
+    }
+    @Bean
     public Jackson2JsonMessageConverter jackson2JsonMessageConverter() {
         return new Jackson2JsonMessageConverter();
     }

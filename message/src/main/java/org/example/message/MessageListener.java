@@ -12,8 +12,9 @@ public class MessageListener {
         this.myWebSocketHandler = myWebSocketHandler;
     }
 
-    @RabbitListener(queues = "messageQueue")
+    @RabbitListener(queues = {"messageQueue", "notificationQueue", "statusQueue"})
     public void handleMessage(MessageModel message) {
+        System.out.println("Received message: " + message);
         myWebSocketHandler.sendMessageToUser(message.getToUserId(), message);
     }
 }

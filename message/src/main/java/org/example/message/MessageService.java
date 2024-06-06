@@ -18,17 +18,36 @@ public class MessageService {
 
     public void sendMessage(MessageModel message) {
         UserModel toUser = userClient.getUserById(message.getToUserId());
-        if(message.getSenderId() != 0) {
-            UserModel fromUser = userClient.getUserById(message.getSenderId());
-            if (toUser == null || fromUser == null) {
-                throw new IllegalArgumentException("User not found");
+        if(toUser == null) {
+            throw new IllegalArgumentException("User not found");
+        }
+        message.setRead(false);
+        if(message.getType() == null) {
+            message.setType(MessageType.GENERAL);
+
+        }
+        switch (message.getType()){
+            case GENERAL -> {
+                UserModel fromUser = userClient.getUserById(message.getSenderId());
+                if(fromUser == null) {
+                    throw new IllegalArgumentException("User not found");
+                }
+                messageRepository.save(message);
+                rabbitTemplate.convertAndSend("messageQueue", message);
+            }
+            case NOTIFICATION -> {
+                messageRepository.save(message);
+                rabbitTemplate.convertAndSend("notificationQueue", message);
+            }
+
+            case STATUS -> {
+                messageRepository.save(message);
+                rabbitTemplate.convertAndSend("statusQueue", message);
             }
         }
 
-        message.setRead(false);
 
-        messageRepository.save(message);
-        rabbitTemplate.convertAndSend("messageQueue", message);
+
     }
 
     public void markAsRead(Long id) {

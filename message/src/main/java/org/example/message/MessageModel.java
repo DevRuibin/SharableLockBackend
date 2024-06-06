@@ -1,5 +1,6 @@
 package org.example.message;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -16,6 +17,7 @@ public class MessageModel implements Serializable  {
     @Id
     @GeneratedValue
     private Long id;
+    private MessageType type;
     private Long senderId;
     private Long toUserId;
     private String text;
