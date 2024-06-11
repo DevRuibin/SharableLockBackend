@@ -21,6 +21,9 @@ spring:
       ddl-auto: create
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+  redis:
+    host: 127.0.0.1
+    port: 6379
 
 application:
   config:

@@ -20,26 +20,26 @@ public class FileUploadController {
     private static final String UPLOAD_DIR = "/uploads";
 
     @PostMapping("/upload-secrets")
-    public String uploadFileSecrets(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<FileNameResponse> uploadFileSecrets(@RequestParam("file") MultipartFile file) {
         try {
             File dest = new File(UPLOAD_DIR, Objects.requireNonNull(file.getOriginalFilename()));
             file.transferTo(dest);
-            return "File uploaded successfully: " + dest.getAbsolutePath();
+            return ResponseEntity.ok().body(new FileNameResponse(dest.getName()));
         } catch (IOException e) {
             e.printStackTrace();
-            return "File upload failed!";
+            return ResponseEntity.badRequest().build();
         }
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<FileNameResponse> uploadFile(@RequestParam("file") MultipartFile file) {
         try {
             File dest = new File(UPLOAD_DIR, generateFileName(file));
             file.transferTo(dest);
-            return ResponseEntity.ok().body("File uploaded successfully: " + dest.getAbsolutePath());
+            return ResponseEntity.ok().body(new FileNameResponse(dest.getName()));
         } catch (IOException e) {
             e.printStackTrace();
-            return ResponseEntity.badRequest().body("File upload failed!");
+            return ResponseEntity.badRequest().build();
         }
     }
 
@@ -56,5 +56,5 @@ public class FileUploadController {
         return System.currentTimeMillis() + "_" + UUID.randomUUID() + file.getOriginalFilename();
     }
 
-
 }
+

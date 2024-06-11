@@ -33,14 +33,15 @@ spring:
           uri: http://localhost:8200
           predicates:
             - Path=/api/v1/messages/**
-        - id: files
-          uri: http://localhost:8400
-          predicates:
-            - Path=/api/v1/files/**
         - id: logs
           uri: http://localhost:8700
           predicates:
             - Path=/api/v1/logs/**
+        - id: files
+          uri: http://localhost:8500
+          predicates:
+            - Path=/api/v1/files/**
+            - Path=/files/**
 
 management:
   tracing:

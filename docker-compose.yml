@@ -72,6 +72,14 @@ services:
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
 
+  redis:
+    image: "redis:7.4-rc1-bookworm"
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
 networks:
   postgres:
     driver: bridge
@@ -85,4 +93,5 @@ volumes:
   pgadmin:
   rabbitmq_data:
   esdata:
+  redis_data:
 

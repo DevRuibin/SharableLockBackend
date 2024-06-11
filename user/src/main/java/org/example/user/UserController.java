@@ -40,7 +40,7 @@ public class UserController {
 
     @Operation(summary = "Update an existing user")
     @PutMapping("/{id}")
-    public ResponseEntity<UserModel> update(@PathVariable Long id, UserModel user) {
+    public ResponseEntity<UserModel> update(@PathVariable Long id, @RequestBody UserModel user) {
         UserModel userResponse = service.updateUser(id, user);
         return ResponseEntity.ok(userResponse);
     }
@@ -51,6 +51,28 @@ public class UserController {
         UserModel userResponse = service.changePassword(id, changePwdRequest);
         return ResponseEntity.ok(userResponse);
     }
+
+    @Operation(summary = "request to get a dynamic code")
+    @GetMapping("/{user-id}/request-code")
+    public ResponseEntity<Void> requestCode(@PathVariable("user-id") Long userId) {
+        service.requestCode(userId);
+        return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "Change the password with a dynamic code")
+    @PutMapping("/{id}/change-password-with-code")
+    public ResponseEntity<UserModel> changePasswordWithCode(@PathVariable Long id, @RequestBody ChangePwdRequest changePwdRequest) {
+        try{
+            System.out.println("Code: " + changePwdRequest.getCode());
+            System.out.println("new password: " + changePwdRequest.getNewPassword());
+            UserModel userResponse = service.changePasswordWithCode(id, changePwdRequest);
+            return ResponseEntity.ok(userResponse);
+        }
+        catch (Exception e){
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
 
     @Operation(summary = "Delete an existing user")
     @DeleteMapping("/{id}")

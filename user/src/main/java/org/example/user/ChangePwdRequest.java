@@ -8,4 +8,5 @@ import lombok.Data;
 public class ChangePwdRequest {
     String oldPassword;
     String newPassword;
+    String code;
 }

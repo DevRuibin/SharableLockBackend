@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final PasswordService passwordService;
     public UserModel createUser(UserRequest userRequest){
         UserModel userModel = UserModel.builder()
                 .username(Utils.randomUsername())
@@ -51,6 +52,22 @@ public class UserService {
             return userRepository.save(userModel);
         }
         throw new RuntimeException("Old password is incorrect");
+    }
+
+    public void requestCode(Long userId) {
+        userRepository.findById(userId).orElseThrow();
+        String code = passwordService.requestCode(userId.toString());
+        System.out.println("Code: " + code);
+    }
+
+    public UserModel changePasswordWithCode(Long id, ChangePwdRequest changePwdRequest) {
+        UserModel userModel = userRepository.findById(id).orElseThrow();
+        String code = passwordService.getCode(userModel.getId().toString());
+        if(code != null && code.equals(changePwdRequest.getCode())){
+            userModel.setPassword(changePwdRequest.getNewPassword());
+            return userRepository.save(userModel);
+        }
+        throw new RuntimeException("Code is incorrect");
     }
 }
 
