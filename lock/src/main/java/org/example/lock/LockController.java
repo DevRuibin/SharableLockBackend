@@ -16,7 +16,7 @@ public class LockController {
 
     @Operation(summary = "Create a new lock")
     @PostMapping
-    public ResponseEntity<LockModel> createLock(LockModel lockModel) throws JsonProcessingException {
+    public ResponseEntity<LockModel> createLock(@RequestBody LockModel lockModel) throws JsonProcessingException {
         return ResponseEntity.ok(lockService.createLock(lockModel));
     }
 
@@ -41,7 +41,7 @@ public class LockController {
     @Operation(summary = "Update a lock by ID", description = "Update a lock's specific field by ID." +
             "it can be used to update the name, description, owner, users, managers, and status of the lock.")
     @PatchMapping("/{id}")
-    public ResponseEntity<LockModel> updateLock(@PathVariable Long id, PatchRequest body) throws JsonProcessingException {
+    public ResponseEntity<LockModel> updateLock(@PathVariable Long id, @RequestBody PatchRequest body) throws JsonProcessingException {
         System.out.println("Updating lock with id: " + id + " and body: " + body);
         LockModel lockModel = lockService.updateLock(id, body);
         return ResponseEntity.ok(lockModel);

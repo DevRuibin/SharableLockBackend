@@ -1,0 +1,116 @@
+### Create two users, Hasan
+POST http://localhost:8222/api/v1/users
+Content-Type: application/json
+
+{
+    "email": "hasan",
+    "password": "hasan123"
+}
+
+
+### Create two users, Ruibin
+POST http://localhost:8222/api/v1/users
+Content-Type: application/json
+
+{
+    "email": "ruibin",
+    "password": "ruibin123"
+}
+
+
+### Create four locks, hasan and ruibin each has two locks
+POST http://localhost:8222/api/v1/locks
+Content-Type: application/json
+
+{
+  "name": "Lock 1",
+  "picture": "http://10.0.2.2:8500/files/a.jpg",
+  "uid": "aaa",
+  "power": 0,
+  "online": true,
+  "locked": true,
+  "ownerId": 1,
+  "latitude": 0,
+  "longitude": 0,
+  "reportBattery": 0,
+  "reportLocation": 0,
+  "users": [
+    2
+  ],
+  "managers": [
+  ]
+}
+
+
+###
+POST http://localhost:8222/api/v1/locks
+Content-Type: application/json
+
+{
+"name": "Lock 2",
+"picture": "http://10.0.2.2:8500/files/b.jpeg",
+"uid": "ddacdwljfaowiej",
+"power": 0,
+"online": true,
+"locked": true,
+"ownerId": 1,
+"latitude": 0,
+"longitude": 0,
+"reportBattery": 0,
+"reportLocation": 0,
+"users": [
+2
+],
+"managers": [
+]
+}
+
+
+###
+POST http://localhost:8222/api/v1/locks
+Content-Type: application/json
+
+{
+  "name": "Lock 3",
+  "picture": "http://10.0.2.2:8500/files/c.jpeg",
+  "uid": "dajchewappkpfe",
+  "power": 0,
+  "online": true,
+  "locked": true,
+  "ownerId": 2,
+  "latitude": 0,
+  "longitude": 0,
+  "reportBattery": 0,
+  "reportLocation": 0,
+  "users": [
+    1
+  ],
+  "managers": [
+  ]
+}
+
+
+
+###
+POST http://localhost:8222/api/v1/locks
+Content-Type: application/json
+
+{
+  "name": "Lock 4",
+  "picture": "http://10.0.2.2:8500/files/d.jpg",
+  "uid": "dsackjewttttttttthk",
+  "power": 0,
+  "online": true,
+  "locked": true,
+  "ownerId": 2,
+  "latitude": 0,
+  "longitude": 0,
+  "reportBattery": 0,
+  "reportLocation": 0,
+  "users": [
+    1
+  ],
+  "managers": [
+  ]
+}
+
