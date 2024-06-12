@@ -25,9 +25,14 @@ public class MessageController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{userId}")
+    @GetMapping("/users/{userId}")
     public ResponseEntity<List<MessageModel>> getMessages(@PathVariable Long userId) {
         return ResponseEntity.ok(messageService.getMessagesByUserID(userId));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<MessageModel> getMessage(@PathVariable Long id) {
+        return ResponseEntity.ok(messageService.getMessage(id));
     }
 
     @DeleteMapping("/{id}")

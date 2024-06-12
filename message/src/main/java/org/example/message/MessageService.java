@@ -72,4 +72,9 @@ public class MessageService {
     public void deleteMessage(Long id) {
         messageRepository.deleteById(id);
     }
+
+    public MessageModel getMessage(Long id) {
+        return messageRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Message not found"));
+    }
 }
