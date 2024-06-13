@@ -18,6 +18,17 @@ Content-Type: application/json
 }
 
 
+
+### Create another user
+POST http://localhost:8222/api/v1/users
+Content-Type: application/json
+
+{
+"email": "test",
+"password": "test123"
+}
+
+
 ### Create four locks, hasan and ruibin each has two locks
 POST http://localhost:8222/api/v1/locks
 Content-Type: application/json

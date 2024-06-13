@@ -27,6 +27,7 @@ public class MessageController {
 
     @GetMapping("/users/{userId}")
     public ResponseEntity<List<MessageModel>> getMessages(@PathVariable Long userId) {
+        System.out.println("Getting messages for user: " + userId);
         return ResponseEntity.ok(messageService.getMessagesByUserID(userId));
     }
 

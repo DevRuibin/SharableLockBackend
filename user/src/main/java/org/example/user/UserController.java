@@ -20,6 +20,14 @@ public class UserController {
         UserModel userResponse = service.createUser(user);
         return ResponseEntity.ok(userResponse);
     }
+
+    @Operation(summary = "Get user information by email")
+    @GetMapping
+    public ResponseEntity<UserModel> findByEmail(@RequestParam String email) {
+        System.out.println("User email: " + email);
+        return ResponseEntity.ok(service.findByEmail(email));
+    }
+
     @Operation(summary = " Login a user",
             description = "Login user with email and password",
             responses = {

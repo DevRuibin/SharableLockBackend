@@ -19,8 +19,7 @@ public class MessageModel implements Serializable  {
     private Long senderId;
     private Long toUserId;
     private String text;
-    @Lob
-    @Column(length = 10000)
+    @Column(columnDefinition="TEXT")
     private String detail;
     private Long timestamp;
     private boolean read;

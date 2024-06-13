@@ -65,6 +65,7 @@ public class MessageService {
                 throw new IllegalArgumentException("User not found");
             }
         }
+        System.out.println("Getting messages for user(Service): " + userId);
         return messageRepository.findByToUserIdOrSenderId(userId, userId)
                 .orElse(List.of());
     }

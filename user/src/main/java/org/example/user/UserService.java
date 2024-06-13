@@ -69,6 +69,10 @@ public class UserService {
         }
         throw new RuntimeException("Code is incorrect");
     }
+
+    public UserModel findByEmail(String email) {
+        return userRepository.findByEmail(email).orElseThrow();
+    }
 }
 
 
