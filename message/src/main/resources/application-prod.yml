@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: messages
+  cloud:
+    config:
+      name: messages, services
+
+  config:
+    import:
+      - optional:configserver:http://spring-config-server:8080

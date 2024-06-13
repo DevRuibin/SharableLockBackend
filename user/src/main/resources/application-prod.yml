@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: users
+  cloud:
+    config:
+      name: users, services
+  config:
+    import:
+      - optional:configserver:http://spring-config-server:8080

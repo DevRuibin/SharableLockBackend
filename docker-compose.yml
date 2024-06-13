@@ -71,6 +71,8 @@ services:
       RABBITMQ_DEFAULT_PASS: password
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+       - rabbitmq
 
   redis:
     image: "redis:7.4-rc1-bookworm"
@@ -79,6 +81,164 @@ services:
       - "6379:6379"
     volumes:
       - redis_data:/data
+    networks:
+      - redis
+      - spring
+      - postgres
+      - zipkin
+
+  nginx:
+    build: StaticServer/nginx
+    container_name: nginx
+    ports:
+      - "8500:80"
+      - "8501:443"
+    volumes:
+        - ./StaticServer/nginx/nginx.conf:/etc/nginx/nginx.conf
+        - ./StaticServer/uploads:/usr/share/nginx/html:ro
+    networks:
+        - nginx
+    depends_on:
+      - static-server-spring
+
+
+  spring-config-server:
+    build: ./config-server
+    container_name: spring-config-server
+    networks:
+        - spring
+        - postgres
+        - zipkin
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    ports:
+      - "8888:8080"
+
+
+  spring-auth-service:
+    build: ./authentication
+    container_name: spring-auth-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    networks:
+        - spring
+        - postgres
+        - zipkin
+    depends_on:
+      - spring-config-server
+
+  spring-discovery-service:
+    build: ./discovery
+    container_name: spring-discovery-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    networks:
+        - spring
+        - postgres
+        - zipkin
+    depends_on:
+      - spring-config-server
+
+  spring-gateway-service:
+    build: ./gateway
+    container_name: spring-gateway-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    ports:
+      - "8222:8080"
+    networks:
+        - spring
+        - postgres
+        - zipkin
+    depends_on:
+      - spring-config-server
+
+
+  spring-lock-service:
+    build: ./lock
+    container_name: spring-lock-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    networks:
+        - spring
+        - postgres
+        - zipkin
+    depends_on:
+      - spring-config-server
+
+  spring-log-service:
+    build: ./logging
+    container_name: spring-log-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    networks:
+        - spring
+        - postgres
+        - zipkin
+        - esnet
+    depends_on:
+      - spring-config-server
+
+
+  spring-message-service:
+    build: ./message
+    container_name: spring-message-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    networks:
+        - spring
+        - postgres
+        - zipkin
+        - esnet
+        - rabbitmq
+    depends_on:
+      - spring-config-server
+
+  spring-mqtt-service:
+    build: ./mqtt-server
+    container_name: spring-mqtt-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    networks:
+        - spring
+        - postgres
+        - zipkin
+    depends_on:
+      - spring-config-server
+
+
+  static-server-spring:
+    build: ./StaticServer/Server
+    container_name: spring-static-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    networks:
+        - spring
+        - postgres
+        - zipkin
+        - nginx
+    volumes:
+      - ./StaticServer/uploads:/uploads
+
+    depends_on:
+      - spring-config-server
+
+  spring-user-service:
+    build: ./user
+    container_name: spring-user-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    networks:
+        - spring
+        - postgres
+        - zipkin
+        - redis
+    depends_on:
+      - spring-config-server
+
+
+
+
 
 networks:
   postgres:
@@ -86,6 +246,14 @@ networks:
   zipkin:
     driver: bridge
   esnet:
+    driver: bridge
+  spring:
+    driver: bridge
+  redis:
+    driver: bridge
+  rabbitmq:
+    driver: bridge
+  nginx:
     driver: bridge
 
 volumes:

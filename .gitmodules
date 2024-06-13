@@ -2,3 +2,6 @@
 	path = ShareableLockDocs
 	url = git@github.com:DevRuibin/ShareableLockDocs.git
 	branch = main
+[submodule "config-server/src/main/resources/ShareableLockConfigs"]
+	path = config-server/src/main/resources/ShareableLockConfigs
+	url = git@github.com:DevRuibin/ShareableLockConfigs.git
