@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 @Data
 @Builder
+@ToString
 public class MessageModel implements Serializable {
     private Long id;
     private MessageType type;

@@ -1,9 +1,6 @@
 package org.example.message;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import java.io.Serializable;
 
@@ -22,6 +19,8 @@ public class MessageModel implements Serializable  {
     private Long senderId;
     private Long toUserId;
     private String text;
+    @Lob
+    @Column(length = 10000)
     private String detail;
     private Long timestamp;
     private boolean read;

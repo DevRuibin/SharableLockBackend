@@ -1,6 +1,5 @@
 package org.example.lock;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.example.lock.client.MessageClient;
 import org.example.lock.client.MessageModel;

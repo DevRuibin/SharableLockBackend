@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 public class LockModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
