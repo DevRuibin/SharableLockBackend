@@ -28,7 +28,7 @@ function generate_jar_file_gradle {
     local project_dir="$1"
     local jar_name="$2"
     cd "$project_dir" || exit 1
-    gradle clean build -x test || exit 1
+    gradle clean bootJar -x test || exit 1
     local jar_files
     jar_files=$(get_jar_files "build/libs")
     for jar_file in $jar_files; do
