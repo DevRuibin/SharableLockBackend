@@ -26,9 +26,19 @@ public class MessageController {
     }
 
     @GetMapping("/users/{userId}")
-    public ResponseEntity<List<MessageModel>> getMessages(@PathVariable Long userId) {
+    public ResponseEntity<List<MessageUserResponse>> getMessages(@PathVariable Long userId) {
         System.out.println("Getting messages for user: " + userId);
-        return ResponseEntity.ok(messageService.getMessagesByUserID(userId));
+        try {
+            List<MessageUserResponse> messagesByUserID = messageService.getMessagesByUserID(userId);
+            System.out.println("Get user");
+            return ResponseEntity.ok(messagesByUserID);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+
+        }
+        return ResponseEntity.badRequest().build();
+
+
     }
 
     @GetMapping("/{id}")

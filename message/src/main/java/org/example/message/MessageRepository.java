@@ -9,4 +9,8 @@ import java.util.Optional;
 @Repository
 public interface MessageRepository extends JpaRepository<MessageModel, Long>{
     Optional<List<MessageModel>> findByToUserIdOrSenderId(Long toUserId, Long senderId);
+
+    Optional<List<MessageModel>> findBySenderIdAndType(Long userId, MessageType type);
+
+    Optional<List<MessageModel>> findByToUserIdAndType(Long userId, MessageType type);
 }
