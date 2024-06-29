@@ -1,0 +1,222 @@
+version: '3.8'
+
+services:
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    restart: unless-stopped
+  zipkin:
+    container_name: zipkin
+    image: openzipkin/zipkin
+    ports:
+      - "9411:9411"
+
+  elasticsearch:
+    image: elasticsearch:7.17.21
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+
+
+  kibana:
+    image: kibana:7.17.21
+    container_name: kibana
+    ports:
+      - "5601:5601"
+    environment:
+      ELASTICSEARCH_HOSTS: "http://elasticsearch:9200"
+
+
+  rabbitmq:
+    build:
+        context: .
+        dockerfile: rabbitmq.Dockerfile
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: password
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
+  redis:
+    image: "redis:7.4-rc1-bookworm"
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  spring-config-server:
+    build:
+      context: .
+      dockerfile: config.Dockerfile
+    container_name: spring-config-server
+    ports:
+      - "8888:8080"
+    environment:
+        - SPRING_PROFILES_ACTIVE=prod
+
+  spring-discovery-server:
+    build:
+      context: .
+      dockerfile: discovery.Dockerfile
+    container_name: spring-discovery-server
+    ports:
+      - "8761:8080"
+    depends_on:
+      - spring-config-server
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+
+
+  spring-gateway-server:
+    build:
+      context: .
+      dockerfile: gateway.Dockerfile
+    container_name: spring-gateway-server
+    ports:
+      - "8222:8080"
+    depends_on:
+      - spring-config-server
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+
+  postgresql-lock:
+    container_name: postgresql-lock
+    image: postgres
+    environment:
+      POSTGRES_USER: ruibin
+      POSTGRES_PASSWORD: ruibin123
+      PGDATA: /data/postgres
+      POSTGRES_DB: locks
+    restart: unless-stopped
+
+  spring-lock-server:
+    build:
+      context: .
+      dockerfile: lock.Dockerfile
+    container_name: spring-lock-server
+    ports:
+      - "8300:8080"
+    depends_on:
+      - spring-config-server
+      - postgresql-lock
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+
+  postgresql-user:
+    container_name: postgresql-user
+    image: postgres
+    environment:
+      POSTGRES_USER: ruibin
+      POSTGRES_PASSWORD: ruibin123
+      PGDATA: /data/postgres
+      POSTGRES_DB: users
+    restart: unless-stopped
+
+  spring-user-server:
+    build:
+      context: .
+      dockerfile: user.Dockerfile
+    container_name: spring-user-server
+    ports:
+      - "8100:8080"
+    depends_on:
+      - spring-config-server
+      - postgresql-user
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+
+  postgresql-message:
+    container_name: postgresql-message
+    image: postgres
+    environment:
+      POSTGRES_USER: ruibin
+      POSTGRES_PASSWORD: ruibin123
+      PGDATA: /data/postgres
+      POSTGRES_DB: messages
+    restart: unless-stopped
+
+  spring-message-server:
+    build:
+      context: .
+      dockerfile: message.Dockerfile
+    container_name: spring-message-server
+    ports:
+      - "8200:8080"
+    depends_on:
+      - spring-config-server
+      - postgresql-message
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+
+
+  postgresql-auth:
+    container_name: postgresql-auth
+    image: postgres
+    environment:
+      POSTGRES_USER: ruibin
+      POSTGRES_PASSWORD: ruibin123
+      PGDATA: /data/postgres
+      POSTGRES_DB: auth
+    restart: unless-stopped
+
+  spring-auth-server:
+    build:
+      context: .
+      dockerfile: auth.Dockerfile
+    container_name: spring-auth-server
+    ports:
+      - "8800:8080"
+    depends_on:
+      - spring-config-server
+      - postgresql-auth
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+
+
+  postgresql-logging:
+    container_name: postgresql-logging
+    image: postgres
+    environment:
+      POSTGRES_USER: ruibin
+      POSTGRES_PASSWORD: ruibin123
+      PGDATA: /data/postgres
+      POSTGRES_DB: logging
+    restart: unless-stopped
+
+  spring-logging-server:
+    build:
+      context: .
+      dockerfile: logging.Dockerfile
+    container_name: spring-logging-server
+    ports:
+      - "8700:8080"
+    depends_on:
+      - spring-config-server
+      - postgresql-logging
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+
+
+volumes:
+  pgadmin:
+  rabbitmq_data:
+  esdata:
+  redis_data:

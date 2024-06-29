@@ -7,4 +7,4 @@ spring:
 
   config:
     import:
-      - optional:configserver:http://spring-config-server:8080
+      - configserver:http://spring-config-server:8080
